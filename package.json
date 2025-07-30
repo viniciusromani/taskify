@@ -1,0 +1,26 @@
+{
+  "name": "taskify",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/viniciusromani/taskify#readme",
+  "bugs": {
+    "url": "https://github.com/viniciusromani/taskify/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viniciusromani/taskify.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "eslint": "^9.32.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.6.2"
+  }
+}
