@@ -23,6 +23,14 @@ async function bootstrap() {
     SwaggerModule.createDocument(app, config, options);
   SwaggerModule.setup('docs', app, documentFactory);
 
+  // cors
+  const allowedOrigin =
+    process.env.CORS_ALLOWED_ORIGIN ?? 'http://localhost:5173';
+  app.enableCors({
+    origin: [allowedOrigin],
+    credentials: true,
+  });
+
   // validation
   app.useGlobalPipes(new ValidationPipe());
 

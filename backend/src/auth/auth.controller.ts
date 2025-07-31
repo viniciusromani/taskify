@@ -33,7 +33,12 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
   ) {
     const login = await this.authService.login(loginDto);
-    const expiresIn = ms('12h');
+
+    let expiresIn = ms('12h');
+    if (process.env.JWT_EXPIRES_IN) {
+      const environValue = process.env.JWT_EXPIRES_IN as ms.StringValue;
+      expiresIn = ms(environValue);
+    }
 
     response.cookie('authentication', login.access_token, {
       secure: false, // not recommended for production
