@@ -10,7 +10,7 @@ export class ResponseTaskDTO {
   title: string;
 
   @ApiProperty()
-  description: string;
+  description: string | null;
 
   @ApiProperty()
   status: TaskStatus;

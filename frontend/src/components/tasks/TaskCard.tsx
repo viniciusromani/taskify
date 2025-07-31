@@ -31,8 +31,8 @@ function TaskCard({ task }: { task: TaskResponse }) {
   return (
     <Card className="w-full">
       <CardHeader className="flex flex-col">
-        <div className="w-full flex justify-between items-center">
-          <CardTitle>{task.title}</CardTitle>
+        <div className="w-full flex justify-between gap-2 items-center">
+          <CardTitle className="leading-6">{task.title}</CardTitle>
           <Badge
             variant="outline"
             className={cn(
@@ -45,7 +45,7 @@ function TaskCard({ task }: { task: TaskResponse }) {
           </Badge>
         </div>
         <CardDescription className="flex flex-col space-y-3 mt-4">
-          <div className="flex flex-row gap-2 items-center">
+          <div className="flex flex-row gap-2 items-start">
             <MessageSquare className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
             {task.description ?? "-"}
           </div>

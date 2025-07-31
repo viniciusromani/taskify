@@ -13,8 +13,8 @@ export class TaskEntity extends BaseEntity {
   @Column()
   title: string;
 
-  @Column()
-  description: string;
+  @Column({ type: 'text', nullable: true })
+  description: string | null;
 
   @Column({
     type: 'enum',

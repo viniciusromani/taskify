@@ -6,11 +6,20 @@ type TaskResponse = {
   title: string;
   description: string | null;
   status: TaskStatusResponse;
-  createdAt: string;
+  createdAt: Date;
+};
+type TaskRequest = {
+  title: string;
+  description: string | null;
+  status: TaskStatusResponse;
 };
 
 async function getTasks() {
   return api.get<TaskResponse[]>("tasks");
 }
 
-export { getTasks, type TaskResponse, type TaskStatusResponse };
+async function postTask(body: TaskRequest) {
+  return api.post<TaskResponse>("tasks", body);
+}
+
+export { getTasks, postTask, type TaskResponse, type TaskStatusResponse };
