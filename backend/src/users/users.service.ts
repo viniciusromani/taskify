@@ -2,10 +2,11 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { hash } from 'bcrypt';
-import { FindOptionsWhere, Repository } from 'typeorm';
+import { compare, hash } from 'bcrypt';
+import { EntityNotFoundError, FindOptionsWhere, Repository } from 'typeorm';
 
 import { RequestUserDto } from './dto/request-user.dto';
 import { UserEntity } from './entities/user.entity';
@@ -48,5 +49,21 @@ export class UsersService {
     const result = await this.usersRepository.softDelete({ id });
     if (result.affected == 0) throw new NotFoundException('User not found');
     return true;
+  }
+
+  // AuthService helper methods
+  async validateLoginUser(email: string, password: string) {
+    try {
+      const user = await this.usersRepository.findOneByOrFail({ email });
+      const passwordsMatch = await compare(password, user.password);
+      if (!passwordsMatch)
+        throw new UnauthorizedException('Invalid credentials');
+      return user;
+    } catch (error) {
+      if (error instanceof EntityNotFoundError) {
+        throw new UnauthorizedException('Invalid credentials');
+      }
+      throw error;
+    }
   }
 }

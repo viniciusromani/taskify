@@ -15,10 +15,17 @@ import { RequestUserDto } from './dto/request-user.dto';
 import { ResponseUserDTO } from './dto/response-user.dto';
 import { UserEntity } from './entities/user.entity';
 import { UsersService } from './users.service';
+import { User } from '../auth/decorators/user.decorator';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  // this is for httponly auth cookie renew session on frontend
+  @Get('me')
+  findMe(@User() user: UserEntity) {
+    return user;
+  }
 
   @Post()
   async create(@Body() createUserDto: RequestUserDto) {

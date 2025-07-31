@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindOptionsWhere, Repository } from 'typeorm';
 
@@ -20,23 +20,38 @@ export class TasksService {
     return await this.taskRepository.save(newTask);
   }
 
-  async findAll() {
-    return await this.taskRepository.find();
+  async findAll(userId: string) {
+    return await this.taskRepository.find({
+      where: {
+        user: { id: userId },
+      },
+    });
   }
 
-  async findBy(where: FindOptionsWhere<TaskEntity>) {
-    return await this.taskRepository.findOneByOrFail(where);
+  async findBy(where: FindOptionsWhere<TaskEntity>, userId: string) {
+    const task = await this.taskRepository.findOneByOrFail(where);
+    if (task.user.id != userId)
+      throw new ForbiddenException('Not authorized to access resource');
+    return task;
   }
 
-  async update(id: string, updateTaskDto: Partial<RequestTaskDto>) {
+  async update(id: string, userId: string, updateTaskDto: Partial<RequestTaskDto>) {
+    await this.checkAccess(id, userId);
     const result = await this.taskRepository.update(id, updateTaskDto);
     if (result.affected == 0) throw new NotFoundException('Task not found');
     return await this.taskRepository.findOneByOrFail({ id });
   }
 
-  async remove(id: string) {
+  async remove(id: string, userId: string) {
+    await this.checkAccess(id, userId);
     const result = await this.taskRepository.softDelete({ id });
     if (result.affected == 0) throw new NotFoundException('Task not found');
     return true;
+  }
+
+  async checkAccess(taskId: string, userId: string) {
+    const task = await this.taskRepository.findOneByOrFail({ id: taskId });
+    if (task.user.id != userId)
+      throw new ForbiddenException('Not authorized to access resource');
   }
 }
