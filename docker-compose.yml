@@ -3,7 +3,6 @@ services:
     image: postgres
     restart: always
     container_name: postgres
-    env_file: ./backend/.env
     environment:
       - POSTGRES_HOST=${DATABASE_HOST}
       - POSTGRES_USER=${DATABASE_USER}
@@ -25,4 +24,17 @@ services:
       - postgres
     volumes:
       - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - '5173:5173'
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
       - /app/node_modules
