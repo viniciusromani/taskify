@@ -7,14 +7,17 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
+import { ApiOkResponse } from '@nestjs/swagger';
+import { Response } from 'express';
+import * as ms from 'ms';
 
 import { AuthService } from './auth.service';
 import { Public } from './decorators/public.decorator';
 import { RequestLoginDto } from './dto/request-login.dto';
 import { RequestRegisterDto } from './dto/request-register.dto';
+import { ResponseLoginDto } from './dto/response-login.dto';
+import { ResponseRegisterDto } from './dto/response-register.dto';
 import { LocalGuard } from './guards/local.guard';
-import * as ms from 'ms';
-import { Response } from 'express';
 
 @Controller('auth')
 @Public()
@@ -24,21 +27,27 @@ export class AuthController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   @UseGuards(LocalGuard)
-  async login(@Body() loginDto: RequestLoginDto, @Res({ passthrough: true }) response: Response) {
+  @ApiOkResponse({ description: 'Login', type: ResponseLoginDto })
+  async login(
+    @Body() loginDto: RequestLoginDto,
+    @Res({ passthrough: true }) response: Response,
+  ) {
     const login = await this.authService.login(loginDto);
     const expiresIn = ms('12h');
 
     response.cookie('authentication', login.access_token, {
-      secure: false,      // not recommended for production
+      secure: false, // not recommended for production
       httpOnly: true,
-      expires: new Date(Date.now() + expiresIn as number),
+      expires: new Date(Date.now() + expiresIn),
     });
 
-    return login;
+    return new ResponseLoginDto(login, login.access_token);
   }
 
   @Post('register')
+  @ApiOkResponse({ description: 'Register', type: ResponseRegisterDto })
   async register(@Body() registerDto: RequestRegisterDto) {
-    return await this.authService.register(registerDto);
+    const user = await this.authService.register(registerDto);
+    return new ResponseRegisterDto(user);
   }
 }

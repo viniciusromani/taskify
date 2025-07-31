@@ -1,11 +1,24 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 import { TaskEntity, TaskStatus } from '../entities/task.entity';
 
 export class ResponseTaskDTO {
+  @ApiProperty()
   id: string;
+
+  @ApiProperty()
   title: string;
+
+  @ApiProperty()
   description: string;
+
+  @ApiProperty()
   status: TaskStatus;
+
+  @ApiProperty()
   createdAt: Date;
+
+  @ApiProperty()
   updatedAt: Date;
 
   constructor(task: TaskEntity) {

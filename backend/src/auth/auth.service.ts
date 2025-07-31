@@ -14,8 +14,7 @@ export class AuthService {
   ) {}
 
   async login(loginDto: RequestLoginDto) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...user } = await this.userService.findBy({
+    const user = await this.userService.findBy({
       email: loginDto.email,
     });
     const accessToken = await this.jwtService.signAsync({ sub: user.id });
@@ -23,9 +22,7 @@ export class AuthService {
   }
 
   async register(registerDto: RequestRegisterDto) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...user } = await this.userService.create(registerDto);
-    return user;
+    return await this.userService.create(registerDto);
   }
 
   // guard helper methods
