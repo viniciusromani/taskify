@@ -1,19 +1,27 @@
-/* eslint-disable */
-import * as React from "react";
+/* eslint-disable react-refresh/only-export-components */
+/**
+ * TODO: this is something to fix afterwards,
+ * react-refresh warning when committing has
+ * to do with fast-refresh.
+ * it is saying that it might be a good idea to
+ * split useFormField and Form components in
+ * 2 different files
+ */
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import {
   Controller,
-  FormProvider,
-  useFormContext,
-  useFormState,
   type ControllerProps,
   type FieldPath,
   type FieldValues,
+  FormProvider,
+  useFormContext,
+  useFormState,
 } from "react-hook-form";
 
-import { cn } from "@/lib/utils";
 import { Label } from "@/components/shadcn/label";
+import { cn } from "@/lib/utils";
 
 const Form = FormProvider;
 
@@ -156,12 +164,12 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
 }
 
 export {
-  useFormField,
   Form,
-  FormItem,
-  FormLabel,
   FormControl,
   FormDescription,
-  FormMessage,
   FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  useFormField,
 };
