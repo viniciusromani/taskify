@@ -18,8 +18,28 @@ async function getTasks() {
   return api.get<TaskResponse[]>("tasks");
 }
 
+async function getTaskDetails(id: string) {
+  return api.get<TaskResponse>(`tasks/${id}`);
+}
+
 async function postTask(body: TaskRequest) {
   return api.post<TaskResponse>("tasks", body);
 }
 
-export { getTasks, postTask, type TaskResponse, type TaskStatusResponse };
+async function patchTask(id: string, body: Partial<TaskRequest>) {
+  return api.patch<TaskResponse>(`tasks/${id}`, body);
+}
+
+async function deleteTask(id: string) {
+  return api._delete<TaskResponse>(`tasks/${id}`);
+}
+
+export {
+  deleteTask,
+  getTaskDetails,
+  getTasks,
+  patchTask,
+  postTask,
+  type TaskResponse,
+  type TaskStatusResponse,
+};

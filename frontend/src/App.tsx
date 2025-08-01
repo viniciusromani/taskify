@@ -8,6 +8,7 @@ const Layout = React.lazy(() => import("@/components/Layout"));
 const Login = React.lazy(() => import("@/pages/Login"));
 const Register = React.lazy(() => import("@/pages/Register"));
 const Tasks = React.lazy(() => import("@/pages/Tasks"));
+const TaskDetails = React.lazy(() => import("@/pages/TaskDetails"));
 const NotFound = React.lazy(() => import("@/pages/NotFound"));
 
 function App() {
@@ -37,6 +38,14 @@ function App() {
               element={
                 <React.Suspense fallback={<PageLoading />}>
                   <Tasks />
+                </React.Suspense>
+              }
+            />
+            <Route
+              path="tasks/:taskId"
+              element={
+                <React.Suspense fallback={<PageLoading />}>
+                  <TaskDetails />
                 </React.Suspense>
               }
             />

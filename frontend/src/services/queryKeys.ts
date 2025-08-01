@@ -1,3 +1,4 @@
 const kGetTasks = "kGetTasks";
+const kGetTaskDetails = "kGetTaskDetails";
 
-export { kGetTasks };
+export { kGetTaskDetails, kGetTasks };
