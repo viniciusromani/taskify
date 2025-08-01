@@ -1,5 +1,6 @@
 import { User } from "lucide-react";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 import { RegisterForm } from "@/components/RegisterForm";
 import {
@@ -12,6 +13,11 @@ import {
 
 function Register() {
   const navigate = useNavigate();
+
+  const onSuccess = () => {
+    toast.success("Usuário cadastrado com sucesso!");
+    navigate("/login");
+  };
 
   return (
     <div className="flex flex-col flex-1 my-8 mx-4 items-center space-y-8">
@@ -32,7 +38,7 @@ function Register() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <RegisterForm onRegisterSuccess={() => navigate("/login")} />
+          <RegisterForm onRegisterSuccess={onSuccess} />
         </CardContent>
       </Card>
     </div>

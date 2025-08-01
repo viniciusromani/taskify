@@ -38,9 +38,9 @@ function CreateModal() {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Nova task</DialogTitle>
+          <DialogTitle>Nova tarefa</DialogTitle>
           <DialogDescription>
-            Crie uma nova task e começe a se organizar agora mesmo
+            Crie uma nova tarefa e começe a se organizar agora mesmo
           </DialogDescription>
         </DialogHeader>
         <TaskForm

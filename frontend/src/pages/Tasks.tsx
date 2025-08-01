@@ -36,7 +36,7 @@ function Tasks() {
         <CreateModal />
       </div>
       <div className="flex flex-col flex-1 space-y-6">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">Tasks</h1>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">Tarefas</h1>
 
         {isPending ? (
           <PageLoading />
