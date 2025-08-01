@@ -41,7 +41,9 @@ function Login() {
                 variant="link"
                 className="px-0 font-semibold text-primary hover:text-primary/80 transition-colors duration-200"
               >
-                <Link to="/register">Registre-se</Link>
+                <Link to="/register" data-cy="navigate-register">
+                  Registre-se
+                </Link>
               </Button>
             </p>
           </div>

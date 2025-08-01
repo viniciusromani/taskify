@@ -60,7 +60,7 @@ function LoginForm({ onLoginSuccess }: { onLoginSuccess: () => void }) {
               <FormControl>
                 <Input placeholder="Entre seu email" {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage data-cy="email-error" />
             </FormItem>
           )}
         />
@@ -77,11 +77,16 @@ function LoginForm({ onLoginSuccess }: { onLoginSuccess: () => void }) {
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage data-cy="password-error" />
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full" isLoading={mutation.isPending}>
+        <Button
+          type="submit"
+          className="w-full"
+          isLoading={mutation.isPending}
+          data-cy="login-button"
+        >
           Login
         </Button>
       </form>

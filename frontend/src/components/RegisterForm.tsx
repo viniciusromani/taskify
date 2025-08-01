@@ -66,7 +66,7 @@ function RegisterForm({
               <FormControl>
                 <Input placeholder="Entre seu nome" {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage data-cy="name-error" />
             </FormItem>
           )}
         />
@@ -79,7 +79,7 @@ function RegisterForm({
               <FormControl>
                 <Input placeholder="Entre seu email" {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage data-cy="email-error" />
             </FormItem>
           )}
         />
@@ -96,11 +96,16 @@ function RegisterForm({
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage data-cy="password-error" />
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full" isLoading={mutation.isPending}>
+        <Button
+          type="submit"
+          className="w-full"
+          isLoading={mutation.isPending}
+          data-cy="register-button"
+        >
           Criar conta
         </Button>
       </form>
