@@ -31,6 +31,7 @@ function CreateModal() {
         <Button
           className="flex self-end bg-primary text-white rounded-2xl size-fit p-2"
           onClick={() => setOpen(true)}
+          data-cy="add-task"
         >
           <Plus />
           <span>Adicionar</span>

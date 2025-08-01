@@ -83,7 +83,7 @@ function TaskForm({
               <FormControl>
                 <Input placeholder="Digite o título" {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage data-cy="title-error" />
             </FormItem>
           )}
         />
@@ -100,7 +100,7 @@ function TaskForm({
                   value={field.value ?? ""}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage data-cy="description-error" />
             </FormItem>
           )}
         />
@@ -129,6 +129,7 @@ function TaskForm({
             type="submit"
             className="w-full sm:w-1/4"
             isLoading={mutation.isPending}
+            data-cy="submit-task-form"
           >
             {task != undefined ? "Atualizar" : "Criar"}
           </Button>

@@ -16,7 +16,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky"
+    "prepare": "husky",
+    "cy:open": "cd frontend && npx cypress open",
+    "cy:run": "cd frontend && npx cypress run"
   },
   "devDependencies": {
     "eslint": "^9.32.0",

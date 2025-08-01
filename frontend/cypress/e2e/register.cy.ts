@@ -65,6 +65,10 @@ describe("Register", () => {
 
     cy.get('[data-cy="register-button"]').click();
 
+    cy.get(".Toastify__toast--success")
+      .should("be.visible")
+      .and("contain.text", "User already exists");
+
     cy.url().should("include", "/login");
   });
 
