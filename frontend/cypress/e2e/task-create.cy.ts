@@ -11,6 +11,7 @@ describe("Task Create", () => {
     // TODO: it might be better to hard delete on db
     if (createdTaskId) {
       cy.deleteTask(createdTaskId);
+      createdTaskId = undefined;
     }
   });
 

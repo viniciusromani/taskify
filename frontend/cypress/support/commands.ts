@@ -31,6 +31,7 @@ declare namespace Cypress {
   interface Chainable {
     login(): Chainable<void>;
     deleteTask(id: string): Chainable<void>;
+    deleteUser(id: string): Chainable<void>;
   }
 }
 
@@ -55,6 +56,16 @@ Cypress.Commands.add("deleteTask", (id) => {
     url: `${Cypress.env("backend")}/tasks/${id}`,
     failOnStatusCode: false,
   }).then((response) => {
-    expect([204, 404]).to.include(response.status);
+    expect(response.status).to.eq(204);
+  });
+});
+
+Cypress.Commands.add("deleteUser", (id) => {
+  cy.request({
+    method: "DELETE",
+    url: `${Cypress.env("backend")}/users/${id}`,
+    failOnStatusCode: false,
+  }).then((response) => {
+    expect(response.status).to.eq(204);
   });
 });

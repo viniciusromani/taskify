@@ -1,4 +1,11 @@
 describe("Register", () => {
+  let createdUserId: string;
+  const data = {
+    name: "Teste",
+    email: "teste@teste.com",
+    password: "123",
+  };
+
   beforeEach(() => {
     cy.intercept("GET", "/users/me", {
       statusCode: 401,
@@ -6,6 +13,14 @@ describe("Register", () => {
     }).as("getMe");
 
     cy.visit("/register");
+  });
+
+  after(() => {
+    // TODO: it might be better to hard delete on db
+    if (createdUserId) {
+      cy.login();
+      cy.deleteUser(createdUserId);
+    }
   });
 
   it("[VALIDATION] should not validate any field", () => {
@@ -51,35 +66,27 @@ describe("Register", () => {
   });
 
   it("should register", () => {
-    // WARNING: if the user already exists on db, this test will fail
-    type Data = {
-      name: string;
-      email: string;
-      password: string;
-    };
-    const data = Cypress.env("register") as Data;
-
     cy.get('input[name="name"]').type(data.name);
     cy.get('input[name="email"]').type(data.email);
     cy.get('input[name="password"]').type(data.password);
 
+    cy.intercept("POST", "/auth/register").as("createUser");
     cy.get('[data-cy="register-button"]').click();
+
+    cy.wait("@createUser").then((interception) => {
+      const body = interception.response?.body as { id: string };
+      expect(body).to.have.property("id");
+      createdUserId = body.id;
+    });
 
     cy.get(".Toastify__toast--success")
       .should("be.visible")
-      .and("contain.text", "User already exists");
+      .and("contain.text", "Usuário cadastrado com sucesso!");
 
     cy.url().should("include", "/login");
   });
 
   it("should show user already registered toast", () => {
-    type Data = {
-      name: string;
-      email: string;
-      password: string;
-    };
-    const data = Cypress.env("register") as Data;
-
     cy.get('input[name="name"]').type(data.name);
     cy.get('input[name="email"]').type(data.email);
     cy.get('input[name="password"]').type(data.password);
