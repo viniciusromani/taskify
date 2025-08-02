@@ -94,7 +94,6 @@ describe("Task Create", () => {
       createdTaskId = body.id;
     });
 
-    // verifica se a task apareceu na tela
     cy.get("form").should("not.exist");
     cy.contains(title).should("be.visible");
   });

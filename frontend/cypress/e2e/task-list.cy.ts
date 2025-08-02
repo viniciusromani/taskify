@@ -23,13 +23,13 @@ describe("Task List", () => {
 
     cy.get('[data-cy="empty-title"]')
       .should("be.visible")
-      .and("contain.text", "Sem tasks cadastradas");
+      .and("contain.text", "Sem tarefas cadastradas");
 
     cy.get('[data-cy="empty-description"]')
       .should("be.visible")
       .and(
         "contain.text",
-        'Verifique o filtro selecionado ou crie uma task através do botão "+" no topo da tela. Organize sua rotina agora mesmo!',
+        'Verifique o filtro selecionado ou crie uma tarefa através do botão "+" no topo da tela. Organize sua rotina agora mesmo!',
       );
   });
 

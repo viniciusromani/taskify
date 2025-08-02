@@ -62,6 +62,7 @@ function TaskDetails() {
               className="hidden sm:block sm:size-8 sm:flex sm:justify-center"
               onClick={onDelete}
               isLoading={mutation.isPending}
+              data-cy="task-delete"
             >
               <Trash2 />
             </Button>
@@ -80,6 +81,7 @@ function TaskDetails() {
               className="w-full sm:hidden"
               onClick={onDelete}
               isLoading={mutation.isPending}
+              data-cy="task-delete"
             >
               Excluir
             </Button>

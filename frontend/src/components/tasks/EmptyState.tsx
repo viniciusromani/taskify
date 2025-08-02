@@ -15,14 +15,14 @@ function EmptyState() {
         className="text-lg sm:text-xl font-semibold text-foreground mb-3"
         data-cy="empty-title"
       >
-        Sem tasks cadastradas
+        Sem tarefas cadastradas
       </h3>
       <p
         className="text-sm sm:text-base text-muted-foreground mb-6 max-w-md mx-auto leading-relaxed"
         data-cy="empty-description"
       >
-        Verifique o filtro selecionado ou crie uma task através do botão "+" no
-        topo da tela. Organize sua rotina agora mesmo!
+        Verifique o filtro selecionado ou crie uma tarefa através do botão "+"
+        no topo da tela. Organize sua rotina agora mesmo!
       </p>
     </div>
   );
