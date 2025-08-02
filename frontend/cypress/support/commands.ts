@@ -32,12 +32,18 @@ declare namespace Cypress {
     login(): Chainable<void>;
     deleteTask(id: string): Chainable<void>;
     deleteUser(id: string): Chainable<void>;
+    createTask(body: TaskRequest): Chainable<string>;
   }
 }
 
 type Credentials = {
   email: string;
   password: string;
+};
+type TaskRequest = {
+  title: string;
+  description: string;
+  status: "pending" | "finished";
 };
 
 Cypress.Commands.add("login", () => {
@@ -67,5 +73,18 @@ Cypress.Commands.add("deleteUser", (id) => {
     failOnStatusCode: false,
   }).then((response) => {
     expect(response.status).to.eq(204);
+  });
+});
+
+Cypress.Commands.add("createTask", (body) => {
+  cy.request({
+    method: "POST",
+    url: `${Cypress.env("backend")}/tasks`,
+    body,
+  }).then((response) => {
+    expect(response.body).to.have.property("id");
+    expect(response.status).to.eq(201);
+    const body = response.body as { id: string };
+    return cy.wrap(body.id);
   });
 });

@@ -20,6 +20,7 @@ function FilterBadge({
         current === value && "bg-primary opacity-60 text-primary-foreground",
       )}
       onClick={onClick}
+      data-cy={`filter-${value}`}
     >
       {name}
     </Badge>

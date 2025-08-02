@@ -15,7 +15,11 @@ function TaskCard({ task }: { task: TaskResponse }) {
   const navigate = useNavigate();
 
   return (
-    <Card className="w-full cursor-pointer" onClick={() => navigate(task.id)}>
+    <Card
+      className="w-full cursor-pointer"
+      onClick={() => navigate(task.id)}
+      data-cy="task-card"
+    >
       <CardHeader className="flex flex-col">
         <div className="w-full flex justify-between gap-2 items-center">
           <CardTitle className="leading-6">{task.title}</CardTitle>

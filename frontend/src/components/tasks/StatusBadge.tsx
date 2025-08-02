@@ -29,6 +29,7 @@ function StatusBadge({ status }: { status: TaskStatusResponse }) {
         "font-medium transition-all duration-200 text-xs sm:text-sm px-2 py-1",
         Config.color,
       )}
+      data-cy="task-status-badge"
     >
       <Config.icon className="w-3 h-3 mr-1 flex-shrink-0" />
       {Config.label}
