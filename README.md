@@ -98,12 +98,12 @@ docker compose -p taskify --env-file backend/.env up --build -d
 
 ### Tests
 
-1. Navigate to `frontend` folder inside project root.
+1. Navigate to `frontend` folder
 2. Install requirements
 ```sh
 npm install
 ```
-3. Create `cypress.env.json` file for cypress inside frontend folder (there is a `cypress.env.json.example` to get you an idea of what is needed)
+3. Create `cypress.env.json` file for cypress (there is a `cypress.env.json.example` to get you an idea of what is needed)
 ```sh
 {
   "host": "http://localhost:5173",
@@ -116,7 +116,7 @@ npm install
 ```
 > ⚠️ **Warning**: Login credentials (admin@admin.com) are created during database seeding. To execute all tests you must provide an existing credential.
 
-4. Run cypress 
+4. Run cypress locally
 ```sh
 # headless mode
 npm run cy:run
