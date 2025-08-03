@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { HealthModule } from './health/health.module';
 import { SeederModule } from './seed/seed.module';
 import { SeedService } from './seed/seed.service';
 import { TasksModule } from './tasks/tasks.module';
@@ -32,6 +33,7 @@ import { UsersModule } from './users/users.module';
     TasksModule,
     AuthModule,
     SeederModule,
+    HealthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

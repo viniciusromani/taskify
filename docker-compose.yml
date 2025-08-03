@@ -8,6 +8,11 @@ services:
       - POSTGRES_USER=${DATABASE_USER}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
       - POSTGRES_DB=${DATABASE_NAME}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 10s
+      retries: 15
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     ports:
@@ -20,12 +25,18 @@ services:
     container_name: backend
     ports:
       - '3000:3000'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 15
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     volumes:
       - ./backend:/app
       - /app/node_modules
-
+  
   frontend:
     build:
       context: ./frontend
@@ -34,7 +45,8 @@ services:
     ports:
       - '5173:5173'
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     volumes:
       - ./frontend:/app
       - /app/node_modules

@@ -8,6 +8,4 @@ RUN npm install
 
 COPY . .
 
-RUN chmod +x ./start.sh
-
-CMD ["sh", "./start.sh"]
+CMD npm run migration:run && npm run start:dev

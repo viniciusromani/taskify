@@ -93,6 +93,9 @@ VITE_API_URL=http://localhost:3000
 docker compose -p taskify --env-file backend/.env up --build -d
 ```
 
+4. Wait for postgres and backend services to be healthy and frontend to be started. Then you can access using `http://localhost:5173`
+> ⚠️ **Warning**: Both Postgres and backend services have a 200-second timeout to become healthy. This should work fine in most environments, but if you run into issues with slow startups, just increase the timeout values in your docker-compose.yml or simply re-run the docker-compose up command — the database is likely to start up faster on subsequent runs
+
 ### Tests
 
 1. Create `cypress.env.json` file for cypress inside frontend folder (there is a `cypress.env.json.example` to get you an idea of what is needed)
