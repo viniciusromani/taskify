@@ -1,29 +1,17 @@
-<!-- PROJECT LOGO -->
-<!-- <p align="center">
-  <a href="http://nestjs.com/" target="blank">
-    <img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" />
-    <img src="https://legacy.reactjs.org/logo-og.png" width="120" alt="React Logo" />
-  </a>
-</p>
-<p align="center">Scalable application to organize your routine into tasks</p> -->
-
 # Taskify
 <!-- ABOUT THE PROJECT -->
 ## Description
 
-This is a fullstack web application built with **NestJS**, **React**, and **TypeScript** that allows users to organize their daily routine by managing tasks. This project provides a clean and scalable architecture for task management, with good error handling and a smooth user experience. It is designed to be **mobile** first but it has a good, friendly and responsive user interface. It tried to focus on some software development best practices just like preventing client side scripts by using HttpOnly cookie auth method, using jwt and passport on backend to protect endpoints, data validation in either back and frontend to prevent saving garbage on database and etc.
+Taskify is a full-stack web application built with NestJS, React, and TypeScript, designed to help users efficiently manage their daily tasks. It offers a clean, scalable architecture with error handling and a smooth user experience.
 
-#### Features
-- JWT authentication
-- HttpOnly auth cookie to prevent client-side scripts
-- Data validation on back and frontend
-- Protected backend endpoints and frontend routes
-- Login
-- Register
-- Task list with status filter
-- Task management (create, update and delete)
-- E2E tests with cypress
-- Dockerized
+The application follows a mobile-first design, while still providing a responsive and user-friendly interface for larger screens. The project emphasizes software development best practices, including clean and maintainable code.
+
+#### Project Overview
+- Authentication using JWT
+- Full CRUD for tasks with status-based filtering
+- E2E tests for main user flows
+- Dockerized environment for easy setup and deployment
+- Clean, modular code structure following industry best practices
 
 ### Built With
 
@@ -36,11 +24,34 @@ This is a fullstack web application built with **NestJS**, **React**, and **Type
 
 #### Frontend
 * [Vite](https://vite.dev/)
-* [React](https://docs.nestjs.com/recipes/passport)
+* [React](https://reactjs.org/)
 * [Typescript](https://www.typescriptlang.org/)
 * [TanstackQuery](https://tanstack.com/query/latest)
 * [Shadcnui](https://ui.shadcn.com/)
-* [Shadcnui](https://react-hook-form.com/)
+* [React-Hook-Form](https://react-hook-form.com/)
+
+### Features
+- User registration and login with JWT
+- Auth cookie with HttpOnly to prevent XSS
+- Data validation on both backend and frontend
+- Protected backend routes and frontend pages
+- Full task CRUD (create, update, delete)
+- Filter tasks by status (pending, completed, all)
+- Dockerized infrastructure with docker-compose
+- E2E tests with Cypress covering main flows
+
+### E2E Tests
+
+E2E tests are implemented using **Cypress** and cover all key scenarios, including:
+
+- User registration
+- User login
+- Creating a task
+- Marking task as completed
+- Deleting task
+- Filtering tasks by status
+- Auth guard: private routes blocked without login
+- Input validations (required fields, etc.)
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -95,20 +106,20 @@ docker compose -p taskify --env-file backend/.env up --build -d
   }
 }
 ```
-> ⚠️ **Warning**: Since you we are running E2E tests, this is going to log in using dockerized API so, provided credentials must be inserted on database. admin@admin user is created on seeding.
+> ⚠️ **Warning**: Since we are running E2E tests, this is going to log in using dockerized API so, provided credentials must be inserted on database. The admin@admin.com user is created during database seeding.
 
 2. Run cypress wizard **OR** run e2e tests headless
 
 `cypress wizard`
 ```sh
-npm run cy:open
+docker exec -it frontend npm run cy:open
 ```
 
 `headless`
 ```sh
-npm run cy:run
+docker exec -it frontend npm run cy:run
 ```
-> ⚠️ **Warning**: You dont need to be inside frontend folder to run tests
+> ⚠️ **Warning**: You don’t need to be inside the frontend folder to run the tests
 
 
 <!-- ROADMAP -->
