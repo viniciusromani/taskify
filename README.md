@@ -84,7 +84,7 @@ docker compose -p taskify --env-file backend/.env up --build -d
 
 ### Tests
 
-1. Create `.env` file for cypress inside frontend folder (there is a `cypress.env.json.example` to get you an idea of what is needed)
+1. Create `cypress.env.json` file for cypress inside frontend folder (there is a `cypress.env.json.example` to get you an idea of what is needed)
 ```sh
 {
   "host": "http://localhost:5173",
@@ -117,6 +117,7 @@ npm run cy:run
 - [ ] Implement [dark-mode](https://ui.shadcn.com/docs/dark-mode/vite)
 - [ ] Add task list default filtering (maybe to always bring pending tasks first)
 - [ ] Create unit tests for backend
+- [ ] Implement logout feature (to switch users for now, you need to change URL to /login on your browser)
 
 <!-- CONTRIBUTING -->
 ## Contributing
