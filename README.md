@@ -92,9 +92,9 @@ VITE_API_URL=http://localhost:3000
 ```sh
 docker compose -p taskify --env-file backend/.env up --build -d
 ```
-
-4. Wait for postgres and backend services to be healthy and frontend to be started. Then you can access using `http://localhost:5173`
 > ⚠️ **Warning**: Both Postgres and backend services have a 150-second timeout to become healthy. This should work fine in most environments, but if you run into issues with slow startups, just increase the timeout values in your docker-compose.yml or simply re-run the docker-compose up command — the database is likely to start up faster on subsequent runs
+
+4. Once docker is finished. Access the platform on your local browser with the url `http://localhost:5173`
 
 ### Tests
 
