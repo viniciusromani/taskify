@@ -72,7 +72,7 @@ git clone git@github.com:viniciusromani/taskify.git
 
 2. Create `.env` file for backend and frontend (both have a `.env.example` to get you an idea of what is needed)
 
-*suggested backend folder env file to run locally with docker*
+*suggested backend .env file to run locally with docker*
 ```.sh
 DATABASE_HOST=postgres
 DATABASE_PORT=5432
@@ -83,7 +83,7 @@ JWT_SECRET=6b20321e40b2c5f676f0c57f7204e937db015615650adefc5bf7bd9e03035559
 JWT_EXPIRES_IN=12h
 CORS_ALLOWED_ORIGIN=http://localhost:5173
 ```
-*suggested frontend folder env file to run locally with docker*
+*suggested frontend .env file to run locally with docker*
 ```.sh
 VITE_API_URL=http://localhost:3000
 ```
