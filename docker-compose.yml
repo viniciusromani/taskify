@@ -17,6 +17,8 @@ services:
       - ./pgdata:/var/lib/postgresql/data
     ports:
       - '5432:5432'
+    networks:
+      - taskify-network
     
   backend:
     build:
@@ -36,6 +38,8 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
+    networks:
+      - taskify-network
   
   frontend:
     build:
@@ -50,3 +54,9 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+    networks:
+      - taskify-network
+
+networks:
+  taskify-network:
+    driver: bridge

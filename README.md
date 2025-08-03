@@ -94,11 +94,16 @@ docker compose -p taskify --env-file backend/.env up --build -d
 ```
 
 4. Wait for postgres and backend services to be healthy and frontend to be started. Then you can access using `http://localhost:5173`
-> ⚠️ **Warning**: Both Postgres and backend services have a 200-second timeout to become healthy. This should work fine in most environments, but if you run into issues with slow startups, just increase the timeout values in your docker-compose.yml or simply re-run the docker-compose up command — the database is likely to start up faster on subsequent runs
+> ⚠️ **Warning**: Both Postgres and backend services have a 150-second timeout to become healthy. This should work fine in most environments, but if you run into issues with slow startups, just increase the timeout values in your docker-compose.yml or simply re-run the docker-compose up command — the database is likely to start up faster on subsequent runs
 
 ### Tests
 
-1. Create `cypress.env.json` file for cypress inside frontend folder (there is a `cypress.env.json.example` to get you an idea of what is needed)
+1. Navigate to `frontend` folder inside project root.
+2. Install requirements
+```sh
+npm install
+```
+3. Create `cypress.env.json` file for cypress inside frontend folder (there is a `cypress.env.json.example` to get you an idea of what is needed)
 ```sh
 {
   "host": "http://localhost:5173",
@@ -109,21 +114,16 @@ docker compose -p taskify --env-file backend/.env up --build -d
   }
 }
 ```
-> ⚠️ **Warning**: Since we are running E2E tests, this is going to log in using dockerized API so, provided credentials must be inserted on database. The admin@admin.com user is created during database seeding.
+> ⚠️ **Warning**: Login credentials (admin@admin.com) are created during database seeding. To execute all tests you must provide an existing credential.
 
-2. Run cypress wizard **OR** run e2e tests headless
-
-`cypress wizard`
+4. Run cypress 
 ```sh
-docker exec -it frontend npm run cy:open
-```
+# headless mode
+npm run cy:run
 
-`headless`
-```sh
-docker exec -it frontend npm run cy:run
+# ui mode
+npm run cy:open
 ```
-> ⚠️ **Warning**: You don’t need to be inside the frontend folder to run the tests
-
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -132,6 +132,7 @@ docker exec -it frontend npm run cy:run
 - [ ] Add task list default filtering (maybe to always bring pending tasks first)
 - [ ] Create unit tests for backend
 - [ ] Implement logout feature (to switch users for now, you need to change URL to /login on your browser)
+- [ ] Use docker to run E2E tests (maybe by using their official docker image)
 
 <!-- CONTRIBUTING -->
 ## Contributing
